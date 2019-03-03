@@ -4,11 +4,15 @@
 ![alt text](https://github.com/PankajRawat333/TemperatureAlert/blob/master/TemperatureAlert%20(1).jpg)
 
 ## Temperature Event Simulator
+This is simple console application to send temperature breach alert in eventHub in every minutes.
+
+code Link here
 
 ## Azure Function
-   1. Store Alert in Cosmos DB
-   2. Create alerts detail in Blob as CSV file.
+This function listen to service bus and push data into cosmos db and same time create csv file in blob (yyyy-mm-dd HH-mm) storage. Azure Stream analytics update reference data in every minute. I'm using this file as reference data for device last alert.
 
+code Link here   
+   
 ## Test Data for simulator
 https://github.com/PankajRawat333/TemperatureAlert/blob/master/TemperatureAlert.json
 
