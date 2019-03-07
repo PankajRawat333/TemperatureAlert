@@ -1,12 +1,5 @@
 # TemperatureAlert
 
-## Requirement
-Device is ingesting Temperature data in every minute. Every device has own temperature breach setting. User should get temperature breach alert.
-
-When temperature will breach continuously, alerts should generate in the following order.
-1. The first alert should generate in 5 minute
-2. After first alert second, third and so on alert should generate in 10 minutes of interval.
-
 ## Architecture
 ![alt text](https://github.com/PankajRawat333/TemperatureAlert/blob/master/TemperatureAlert%20(1).jpg)
 
