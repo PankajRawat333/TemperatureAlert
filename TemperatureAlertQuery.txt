@@ -1,5 +1,7 @@
 SELECT
     t1.DeviceId,MIN(t1.Temperature)MinTemperature, MAX(t1.Temperature)MaxTemperature,t2.ThresholdLimit,System.Timestamp as EventProcessedUtcTime,t3.EventProcessedUtcTime as LastAlertTime
+    ,MIN(CAST(t1.MessageTime AS DateTime)) AS window_start,
+    System.Timestamp AS window_end
 INTO
     [alertOutputsb]
 FROM
