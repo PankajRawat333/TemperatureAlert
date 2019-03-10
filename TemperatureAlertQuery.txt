@@ -1,7 +1,5 @@
 SELECT
     t1.DeviceId,MIN(t1.Temperature)MinTemperature, MAX(t1.Temperature)MaxTemperature,t2.ThresholdLimit,System.Timestamp as EventProcessedUtcTime,t3.EventProcessedUtcTime as LastAlertTime
-    ,MIN(CAST(t1.MessageTime AS DateTime)) AS window_start,
-    System.Timestamp AS window_end
 INTO
     [alertOutputsb]
 FROM
@@ -12,6 +10,6 @@ ON t1.DeviceId = t2.DeviceId
 ON t1.DeviceId = t3.DeviceId   
     WHERE t1.Temperature >= Cast(t2.ThresholdLimit as float)  
     AND (CASE WHEN t3.EventProcessedUtcTime IS NULL THEN 10 ELSE DATEDIFF(minute, t3.EventProcessedUtcTime,t1.MESSAGETIME) END) >= 9
-    GROUP BY t1.DeviceId,t2.ThresholdLimit,t3.EventProcessedUtcTime, SESSIONWINDOW(minute, 4, 5) OVER (PARTITION BY t1.DeviceId)
+    GROUP BY t1.DeviceId,t2.ThresholdLimit,t3.EventProcessedUtcTime, TumblingWindow(minute, 5)
     HAVING MIN(t1.Temperature) >= Cast(t2.ThresholdLimit as float)
     AND MAX(t1.Temperature) >= Cast(t2.ThresholdLimit as float)
